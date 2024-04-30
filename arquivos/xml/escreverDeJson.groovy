@@ -40,7 +40,6 @@ def geraXmlElemento(Map json, xml){
             geraXmlElemento(value, xml)
             xml.escreverFimElemento()
         } else {
-            println value
             xml.escreverAtributo(key, value)
 
         }
