@@ -6,8 +6,15 @@
 *    pai: [
 *      atributoPai: "atributoPai",
 *      filho: [
+*      [
 *        atributoFilho:"atributoFilho"
-*      ]
+*      ],
+*      [
+*        atributoFilho:"atributoFilho2"
+*      ],
+*      [
+*        atributoFilho:"atributoFilho3"
+*      ]]
 *    ]
 *  ]
 *]
@@ -33,15 +40,24 @@ def geraXmlJsonArquivo(String nomeArquivo, String encoding, Map json) {
 }
 
 
-def geraXmlElemento(Map json, xml){
-    json.each { key, value ->
-        if (value instanceof Map) {
-            xml.escreverInicioElemento(key)
-            geraXmlElemento(value, xml)
-            xml.escreverFimElemento()
+def geraXmlObjeto(Map json, xml) {
+  json.each { key, value ->
+    if (value instanceof Map) {
+      xml.escreverInicioElemento(key)
+      geraXmlObjeto(value, xml)
+      xml.escreverFimElemento()
+    } else if (value instanceof List) {
+      value.each { item ->
+        if (item instanceof Map) {
+          xml.escreverInicioElemento(key)
+          geraXmlObjeto(item, xml)
+          xml.escreverFimElemento()
         } else {
-            xml.escreverAtributo(key, value)
-
+          xml.escreverAtributo(key, item)
         }
+      }
+    } else {
+      xml.escreverAtributo(key, value)
     }
+  }
 }
