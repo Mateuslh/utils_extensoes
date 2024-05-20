@@ -19,7 +19,7 @@
 *  ]
 *]
 *
-*geraXmlJsonArquivo("ArquivoTeste.xml","iso-8859-1", json  )
+*xml = geraXmlJsonArquivo("ArquivoTeste.xml","iso-8859-1", json  )
 *Resultado.arquivo(xml) // caso queira gerar o arquivo
 */
 
